@@ -29,21 +29,38 @@ class bcolors:
 async def on_ready():
     # Booting info:
     print(
-        bcolors.OKCYAN + "[INFO]: " + bcolors.ENDC + bcolors.OKGREEN + bcolors.BOLD + "Successful Login! " + bcolors.ENDC)
+        f"{bcolors.OKCYAN}[INFO]: {bcolors.ENDC}{bcolors.OKGREEN}{bcolors.BOLD}Successful Login! {bcolors.ENDC}"
+    )
     print(
-        bcolors.OKCYAN + "[INFO]: " + bcolors.ENDC + "Logged in as: " + bcolors.OKCYAN + bcolors.HEADER + bcolors.ITALIC + "{bot_username}".format(
-            bot_username=bot.user.name) + bcolors.ENDC)
+        (
+            (
+                f"{bcolors.OKCYAN}[INFO]: {bcolors.ENDC}Logged in as: {bcolors.OKCYAN}{bcolors.HEADER}{bcolors.ITALIC}"
+                + "{bot_username}".format(bot_username=bot.user.name)
+            )
+            + bcolors.ENDC
+        )
+    )
     print(
-        bcolors.OKCYAN + "[INFO]: " + bcolors.ENDC + "Bot ID: " + bcolors.OKCYAN + bcolors.HEADER + bcolors.ITALIC + "{bot_user_id}".format(
-            bot_user_id=bot.user.id) + bcolors.ENDC)
+        (
+            (
+                f"{bcolors.OKCYAN}[INFO]: {bcolors.ENDC}Bot ID: {bcolors.OKCYAN}{bcolors.HEADER}{bcolors.ITALIC}"
+                + "{bot_user_id}".format(bot_user_id=bot.user.id)
+            )
+            + bcolors.ENDC
+        )
+    )
     print(
-        bcolors.OKCYAN + "[INFO] Bot Made By" + bcolors.ENDC + bcolors.OKGREEN + bcolors.BOLD + " Alone Dev " + bcolors.ENDC)
+        f"{bcolors.OKCYAN}[INFO] Bot Made By{bcolors.ENDC}{bcolors.OKGREEN}{bcolors.BOLD} Alone Dev {bcolors.ENDC}"
+    )
     print(
-        bcolors.OKCYAN + "[INFO]: " + bcolors.ENDC + bcolors.OKGREEN + bcolors.BOLD + "Successful Login! " + bcolors.ENDC)
+        f"{bcolors.OKCYAN}[INFO]: {bcolors.ENDC}{bcolors.OKGREEN}{bcolors.BOLD}Successful Login! {bcolors.ENDC}"
+    )
     # Set bot's status
     await bot.change_presence(
         activity=discord.Activity(type=discord.ActivityType.playing, name="Ping me with a message to talk to me!"))
-    print(bcolors.FAIL + "[INFO]: " + bcolors.ENDC + bcolors.OKBLUE + "Copyright LaziStudioz™" + bcolors.ENDC)
+    print(
+        f"{bcolors.FAIL}[INFO]: {bcolors.ENDC}{bcolors.OKBLUE}Copyright LaziStudioz™{bcolors.ENDC}"
+    )
     print('----------------------------------------------------------------------')  # Just a hyphen seperator
 
 
@@ -75,19 +92,20 @@ async def setup(ctx, *, channel: discord.TextChannel):
             channels = json.load(f)
         if channel.id in channels:
             embed = discord.Embed(title="Bruh", description="This channel is already setup", color=discord.Color.red())
-            embed.set_footer(text= "Copyright LaziStudioz™")
-            embed.set_thumbnail(url=bot.user.avatar_url)
-            await ctx.reply(embed=embed)
         else:
-          channels.append(channel.id)
-          with open('channels.json', 'w') as f:
-              json.dump(channels, f, indent = 4)
-          embed = discord.Embed(title = "Setup Successful", description = f"Channel {channel.mention} has been added to the setup", color = discord.Color.green())
-          embed.set_footer(text= "Copyright LaziStudioz™")
-          embed.set_thumbnail(url=bot.user.avatar_url)
-          await ctx.reply(embed=embed)
+            channels.append(channel.id)
+            with open('channels.json', 'w') as f:
+                json.dump(channels, f, indent = 4)
+            embed = discord.Embed(title = "Setup Successful", description = f"Channel {channel.mention} has been added to the setup", color = discord.Color.green())
+        embed.set_footer(text= "Copyright LaziStudioz™")
+        embed.set_thumbnail(url=bot.user.avatar_url)
+        await ctx.reply(embed=embed)
     except:
-        embed = discord.Embed(title = "Setup Failed", description = f"Channel not found or a random error occured.", color = discord.Color.red())
+        embed = discord.Embed(
+            title="Setup Failed",
+            description="Channel not found or a random error occured.",
+            color=discord.Color.red(),
+        )
         embed.set_footer(text= "Copyright LaziStudioz™")
         embed.set_thumbnail(url=bot.user.avatar_url)
         await ctx.reply(embed=embed)
@@ -103,16 +121,21 @@ async def remove(ctx, *, channel: discord.TextChannel):
             with open('channels.json', 'w') as f:
                 json.dump(channels, f, indent = 4)
             embed = discord.Embed(title = "Removed Successfully", description = f"Channel {channel.mention} has been removed from the setup", color = discord.Color.green())
-            embed.set_footer(text= "Copyright LaziStudioz™")
-            embed.set_thumbnail(url=bot.user.avatar_url)
-            await ctx.reply(embed=embed)
         else:
-            embed = discord.Embed(title = "Remove Failed", description = f"Channel not found or a random error occured.", color = discord.Color.red())
-            embed.set_footer(text= "Copyright LaziStudioz™")
-            embed.set_thumbnail(url=bot.user.avatar_url)
-            await ctx.reply(embed=embed)
+            embed = discord.Embed(
+                title="Remove Failed",
+                description="Channel not found or a random error occured.",
+                color=discord.Color.red(),
+            )
+        embed.set_footer(text= "Copyright LaziStudioz™")
+        embed.set_thumbnail(url=bot.user.avatar_url)
+        await ctx.reply(embed=embed)
     except:
-        embed = discord.Embed(title = "Remove Failed", description = f"Channel not found or a random error occured.", color = discord.Color.red())
+        embed = discord.Embed(
+            title="Remove Failed",
+            description="Channel not found or a random error occured.",
+            color=discord.Color.red(),
+        )
         embed.set_footer(text= "Copyright LaziStudioz™")
         embed.set_thumbnail(url=bot.user.avatar_url)
         await ctx.reply(embed=embed)
